@@ -8,11 +8,11 @@ import javax.swing.event.ListDataListener;
 /*
  * @author Juan Diego Arriola
  */
-public class Proxy implements ComboBoxModel{
+public class ProxyComboBox implements ComboBoxModel{
 
     private DefaultComboBoxModel realSubject = new DefaultComboBoxModel<>();
     
-    public Proxy(List producto)
+    public ProxyComboBox(List producto)
     {
         for (Object objeto : producto) 
         {

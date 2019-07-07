@@ -1,17 +1,15 @@
 package com.analisis2.insercion.modelo;
 
+import com.analisis2.clases.modelo.EM;
 import com.analisis2.clases.modelo.Marca;
 import com.analisis2.clases.modelo.MarcaJpaController;
 import com.analisis2.clases.modelo.Producto;
 import com.analisis2.clases.modelo.ProductoJpaController;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 public class IncersionInicial {
    
@@ -23,7 +21,6 @@ public class IncersionInicial {
     public void insertarDatos()
     {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("conexion");
-        EntityManager em = emf.createEntityManager();
         
         Producto p1 = new Producto();
         Producto p2 = new Producto();
@@ -93,7 +90,5 @@ public class IncersionInicial {
         
 //        TypedQuery<Cafe> query = em.createNamedQuery("Cafe.findAll", Cafe.class);
 //        List<Cafe> listaCafes = query.getResultList();
-                
-        em.close();
     }
 }

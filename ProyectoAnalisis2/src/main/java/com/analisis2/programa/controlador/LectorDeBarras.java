@@ -1,50 +1,39 @@
 package com.analisis2.programa.controlador;
 
+import com.analisis2.clases.modelo.EM;
 import com.analisis2.clases.modelo.Producto;
-import java.util.ArrayList;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 /*
  * @author Juan Diego Arriola
  */
 public class LectorDeBarras {
-    private static LectorDeBarras codigo;
     private Producto producto;
-    private ClaseFactura facturaObservador;
+    private final IFactura facturaObservador;
     
-    private LectorDeBarras(){
-        facturaObservador = new ClaseFactura();
-    }
-    
-    public static LectorDeBarras crearLector()
-    {
-        if (codigo == null)
-        {
-            codigo = new LectorDeBarras();
-        }
-        return codigo;
+    public LectorDeBarras(){
+        facturaObservador = new FacturaContado();
     }
     
     public Producto leerCodigo(int codigo)
     {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("conexion");
-        EntityManager em = emf.createEntityManager();
-        TypedQuery<Producto> queryProducto = em.createNamedQuery("Producto.findByIdProducto", Producto.class );
+        EM e = EM.crearEntityManager();
+        EntityManager em = e.getEntity();
+        TypedQuery<Producto> queryProducto = em.createNamedQuery("Producto.findByIdProducto", Producto.class);
         queryProducto.setParameter("idProducto", codigo);
         producto = queryProducto.getSingleResult();
         
         return producto;
     }
     
-    public void notificar(float precio)
+    public float notificar(int cantidad, float precio)
     {
-        facturaObservador.actualizar(precio);
+        float subtotal = facturaObservador.actualizar(cantidad, precio);
+        return subtotal;
     }
     
-    public ClaseFactura getFactura()
+    public IFactura getFactura()
     {
         return this.facturaObservador;
     }

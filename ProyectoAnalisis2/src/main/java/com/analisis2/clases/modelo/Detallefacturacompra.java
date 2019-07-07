@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Detallefacturacompra.findAll", query = "SELECT d FROM Detallefacturacompra d")
     , @NamedQuery(name = "Detallefacturacompra.findByIdDetalleFacturaCompra", query = "SELECT d FROM Detallefacturacompra d WHERE d.idDetalleFacturaCompra = :idDetalleFacturaCompra")
-    , @NamedQuery(name = "Detallefacturacompra.findBySubtoal", query = "SELECT d FROM Detallefacturacompra d WHERE d.subtoal = :subtoal")
+    , @NamedQuery(name = "Detallefacturacompra.findBySubtotal", query = "SELECT d FROM Detallefacturacompra d WHERE d.subtotal = :subtotal")
     , @NamedQuery(name = "Detallefacturacompra.findByCantidad", query = "SELECT d FROM Detallefacturacompra d WHERE d.cantidad = :cantidad")})
 public class Detallefacturacompra implements Serializable {
 
@@ -40,8 +40,8 @@ public class Detallefacturacompra implements Serializable {
     @Column(name = "idDetalleFacturaCompra")
     private Integer idDetalleFacturaCompra;
     @Basic(optional = false)
-    @Column(name = "Subtoal")
-    private float subtoal;
+    @Column(name = "Subtotal")
+    private float subtotal;
     @Basic(optional = false)
     @Column(name = "Cantidad")
     private int cantidad;
@@ -59,9 +59,9 @@ public class Detallefacturacompra implements Serializable {
         this.idDetalleFacturaCompra = idDetalleFacturaCompra;
     }
 
-    public Detallefacturacompra(Integer idDetalleFacturaCompra, float subtoal, int cantidad) {
+    public Detallefacturacompra(Integer idDetalleFacturaCompra, float subtotal, int cantidad) {
         this.idDetalleFacturaCompra = idDetalleFacturaCompra;
-        this.subtoal = subtoal;
+        this.subtotal = subtotal;
         this.cantidad = cantidad;
     }
 
@@ -73,12 +73,12 @@ public class Detallefacturacompra implements Serializable {
         this.idDetalleFacturaCompra = idDetalleFacturaCompra;
     }
 
-    public float getSubtoal() {
-        return subtoal;
+    public float getSubtotal() {
+        return subtotal;
     }
 
-    public void setSubtoal(float subtoal) {
-        this.subtoal = subtoal;
+    public void setSubtotal(float subtotal) {
+        this.subtotal = subtotal;
     }
 
     public int getCantidad() {
