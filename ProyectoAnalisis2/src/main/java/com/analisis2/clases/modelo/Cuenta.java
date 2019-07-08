@@ -43,7 +43,10 @@ public class Cuenta implements Serializable {
     @Basic(optional = false)
     @Column(name = "Monto")
     private int monto;
-
+    @Basic(optional = false)
+    @Column(name = "Tipo")
+    private Integer tipo;
+    
     public Cuenta() {
     }
 
@@ -51,10 +54,11 @@ public class Cuenta implements Serializable {
         this.idCuenta = idCuenta;
     }
 
-    public Cuenta(Integer idCuenta, String nombre, int monto) {
+    public Cuenta(Integer idCuenta, String nombre, int monto, int tipo) {
         this.idCuenta = idCuenta;
         this.nombre = nombre;
         this.monto = monto;
+        this.tipo = tipo;
     }
 
     public Integer getIdCuenta() {
@@ -79,6 +83,14 @@ public class Cuenta implements Serializable {
 
     public void setMonto(int monto) {
         this.monto = monto;
+    }
+
+    public Integer getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
     }
 
     @Override
