@@ -137,4 +137,5 @@ public class Facturacompra implements Serializable {
     public String toString() {
         return "com.analisis2.clases.modelo.Facturacompra[ idFacturaCompra=" + idFacturaCompra + " ]";
     }
+    
 }

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.analisis2.clases.modelo;
 
 import com.analisis2.clases.modelo.exceptions.NonexistentEntityException;
@@ -11,24 +16,14 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-/*
+/**
+ *
  * @author Juan Diego Arriola
  */
 public class ArregloHasProductoJpaController implements Serializable {
-    
-    private static ArregloHasProductoJpaController jpa;
 
-    private ArregloHasProductoJpaController(EntityManagerFactory emf) {   
+    public ArregloHasProductoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
-    }
-    
-    public static ArregloHasProductoJpaController crearArregloHasProductoJpaController(EntityManagerFactory emf)
-    {
-        if (jpa == null)
-        {
-            jpa = new ArregloHasProductoJpaController(emf);
-        }
-        return jpa;
     }
     private EntityManagerFactory emf = null;
 

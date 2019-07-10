@@ -51,6 +51,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel4.setText("Crear nuevo arreglo");
 
         jButton3.setText("jButton1");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -132,8 +137,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Compras c = new Compras();
         c.setVisible(true);
         
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        VentanaArreglo c = new VentanaArreglo();
+        c.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_jButton3MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

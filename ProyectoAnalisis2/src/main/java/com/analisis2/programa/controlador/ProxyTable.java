@@ -14,10 +14,7 @@ public class ProxyTable implements TableModel{
 
     private DefaultTableModel realSubject = new DefaultTableModel();
     
-    public ProxyTable()
-    {
-
-    }
+    public ProxyTable(){}
     
     public void nombresDeColumnas(List nombres)
     {

@@ -27,7 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "ArregloHasProducto.findAll", query = "SELECT a FROM ArregloHasProducto a")
     , @NamedQuery(name = "ArregloHasProducto.findByCantidad", query = "SELECT a FROM ArregloHasProducto a WHERE a.cantidad = :cantidad")
-    , @NamedQuery(name = "ArregloHasProducto.findById", query = "SELECT a FROM ArregloHasProducto a WHERE a.id = :id")})
+    , @NamedQuery(name = "ArregloHasProducto.findById", query = "SELECT a FROM ArregloHasProducto a WHERE a.id = :id")
+    , @NamedQuery(name = "ArregloHasProducto.findByPrecio", query = "SELECT a FROM ArregloHasProducto a WHERE a.precio = :precio")})
 public class ArregloHasProducto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +39,9 @@ public class ArregloHasProducto implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "Precio")
+    private Float precio;
     @JoinColumn(name = "Arreglo_idArreglo", referencedColumnName = "idArreglo")
     @ManyToOne(optional = false)
     private Arreglo arregloidArreglo;
@@ -71,6 +75,14 @@ public class ArregloHasProducto implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Float precio) {
+        this.precio = precio;
     }
 
     public Arreglo getArregloidArreglo() {

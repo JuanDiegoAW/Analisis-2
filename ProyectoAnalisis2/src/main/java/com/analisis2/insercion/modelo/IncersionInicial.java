@@ -71,8 +71,8 @@ public class IncersionInicial {
         p5.setExistencia(10);
         p5.setMarcaidMarca(m3);
         
-        MarcaJpaController marcaController = MarcaJpaController.crearMarcaJpaController(emf);
-        ProductoJpaController productoController = ProductoJpaController.crearProductoJpaController(emf);
+        MarcaJpaController marcaController = new MarcaJpaController(emf);
+        ProductoJpaController productoController = new ProductoJpaController(emf);
         
         try {
             marcaController.create(m1);

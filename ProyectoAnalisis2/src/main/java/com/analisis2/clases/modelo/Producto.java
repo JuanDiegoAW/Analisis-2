@@ -30,7 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Producto.findByNombre", query = "SELECT p FROM Producto p WHERE p.nombre = :nombre")
     , @NamedQuery(name = "Producto.findByExistencia", query = "SELECT p FROM Producto p WHERE p.existencia = :existencia")
     , @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")
-    , @NamedQuery(name = "Producto.findByMedida", query = "SELECT p FROM Producto p WHERE p.medida = :medida")})
+    , @NamedQuery(name = "Producto.findByMedida", query = "SELECT p FROM Producto p WHERE p.medida = :medida")
+    , @NamedQuery(name = "Producto.findByPrecio", query = "SELECT p FROM Producto p WHERE p.precio = :precio")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +51,9 @@ public class Producto implements Serializable {
     @Basic(optional = false)
     @Column(name = "Medida")
     private String medida;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "Precio")
+    private Float precio;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoidProducto")
     private Collection<ArregloHasProducto> arregloHasProductoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoidProducto")
@@ -110,6 +114,14 @@ public class Producto implements Serializable {
 
     public void setMedida(String medida) {
         this.medida = medida;
+    }
+
+    public Float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Float precio) {
+        this.precio = precio;
     }
 
     @XmlTransient

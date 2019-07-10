@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Cuenta.findAll", query = "SELECT c FROM Cuenta c")
     , @NamedQuery(name = "Cuenta.findByIdCuenta", query = "SELECT c FROM Cuenta c WHERE c.idCuenta = :idCuenta")
     , @NamedQuery(name = "Cuenta.findByNombre", query = "SELECT c FROM Cuenta c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Cuenta.findByMonto", query = "SELECT c FROM Cuenta c WHERE c.monto = :monto")})
+    , @NamedQuery(name = "Cuenta.findByMonto", query = "SELECT c FROM Cuenta c WHERE c.monto = :monto")
+    , @NamedQuery(name = "Cuenta.findByTipo", query = "SELECT c FROM Cuenta c WHERE c.tipo = :tipo")})
 public class Cuenta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,8 +46,8 @@ public class Cuenta implements Serializable {
     private int monto;
     @Basic(optional = false)
     @Column(name = "Tipo")
-    private Integer tipo;
-    
+    private int tipo;
+
     public Cuenta() {
     }
 
@@ -85,11 +86,11 @@ public class Cuenta implements Serializable {
         this.monto = monto;
     }
 
-    public Integer getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(Integer tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
