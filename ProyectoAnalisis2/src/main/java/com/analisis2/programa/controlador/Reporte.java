@@ -10,5 +10,5 @@ package com.analisis2.programa.controlador;
  * @author crist
  */
 public interface Reporte {
-    public float getFinal(); 
+    public void calcularValores(); 
 }

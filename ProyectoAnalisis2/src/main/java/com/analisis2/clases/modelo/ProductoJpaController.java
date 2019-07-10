@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.analisis2.clases.modelo;
 
 import com.analisis2.clases.modelo.exceptions.IllegalOrphanException;
@@ -15,25 +20,13 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Juan Diego Arriola
+ * @author crist
  */
 public class ProductoJpaController implements Serializable {
 
-    private static ProductoJpaController jpa;
-    
-    private ProductoJpaController(EntityManagerFactory emf) {
+    public ProductoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
-    public static ProductoJpaController crearProductoJpaController(EntityManagerFactory emf)
-    {
-        if (jpa == null)
-        {
-            jpa = new ProductoJpaController(emf);
-        }
-        return jpa;
-    }
-    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {

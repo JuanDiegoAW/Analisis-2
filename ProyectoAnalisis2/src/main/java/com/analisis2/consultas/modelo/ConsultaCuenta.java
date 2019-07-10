@@ -18,6 +18,10 @@ import javax.persistence.TypedQuery;
  */
 public class ConsultaCuenta implements ConsultaDeObjetos{
 
+    public ConsultaCuenta() {
+    }
+
+    
     @Override
     public List consultar() {
         EM e = EM.crearEntityManager();

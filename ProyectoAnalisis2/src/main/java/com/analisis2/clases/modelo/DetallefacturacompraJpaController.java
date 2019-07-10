@@ -17,7 +17,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Juan Diego Arriola
+ * @author crist
  */
 public class DetallefacturacompraJpaController implements Serializable {
 

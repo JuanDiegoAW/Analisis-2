@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.analisis2.clases.modelo;
 
 import java.io.Serializable;
@@ -18,8 +23,9 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/*
- * @author Juan Diego Arriola
+/**
+ *
+ * @author crist
  */
 @Entity
 @Table(name = "producto")
@@ -30,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Producto.findByNombre", query = "SELECT p FROM Producto p WHERE p.nombre = :nombre")
     , @NamedQuery(name = "Producto.findByExistencia", query = "SELECT p FROM Producto p WHERE p.existencia = :existencia")
     , @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")
-    , @NamedQuery(name = "Producto.findByMedida", query = "SELECT p FROM Producto p WHERE p.medida = :medida")})
+    , @NamedQuery(name = "Producto.findByMedida", query = "SELECT p FROM Producto p WHERE p.medida = :medida")
+    , @NamedQuery(name = "Producto.findByPrecio", query = "SELECT p FROM Producto p WHERE p.precio = :precio")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +57,8 @@ public class Producto implements Serializable {
     @Basic(optional = false)
     @Column(name = "Medida")
     private String medida;
+    @Column(name = "Precio")
+    private Integer precio;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoidProducto")
     private Collection<ArregloHasProducto> arregloHasProductoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoidProducto")
@@ -112,6 +121,14 @@ public class Producto implements Serializable {
         this.medida = medida;
     }
 
+    public Integer getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Integer precio) {
+        this.precio = precio;
+    }
+
     @XmlTransient
     public Collection<ArregloHasProducto> getArregloHasProductoCollection() {
         return arregloHasProductoCollection;
@@ -160,7 +177,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "com.analisis2.clases.modelo.Producto[ idProducto=" + idProducto + " ]";
     }
     
 }

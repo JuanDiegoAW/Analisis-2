@@ -5,6 +5,21 @@
  */
 package com.analisis2.clases.vista;
 
+import com.analisis2.clases.modelo.Cuenta;
+import com.analisis2.clases.modelo.Producto;
+import static com.analisis2.clases.tipos.TiposCuenta.ACTIVO;
+import static com.analisis2.clases.tipos.TiposCuenta.PASIVO;
+import com.analisis2.consultas.modelo.ConsultaCuenta;
+import com.analisis2.insercion.modelo.IncersionCuenta;
+import com.analisis2.programa.controlador.Activo;
+import com.analisis2.programa.controlador.ClasificadorCuenta;
+import com.analisis2.programa.controlador.LectorDeBarras;
+import com.analisis2.programa.controlador.Pasivo;
+import com.analisis2.programa.controlador.ProxyTable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author crist
@@ -14,8 +29,64 @@ public class Contabilidad extends javax.swing.JFrame {
     /**
      * Creates new form Contabilidad
      */
+    Cuenta cuenta;
+    ConsultaCuenta consulta; 
+    ProxyTable tabla;
+    ClasificadorCuenta clasificador;
+    ClasificadorCuenta nuevascuentas; 
+    List<Cuenta> listaCuentas;
+    
     public Contabilidad() {
         initComponents();
+        clasificador = new ClasificadorCuenta();
+        nuevascuentas = new ClasificadorCuenta();
+        consulta = new ConsultaCuenta();
+        tabla = new ProxyTable();
+        this.llenarColumnas(); 
+    }
+    private void llenarColumnas()
+    {
+        List listaNombres = new ArrayList();
+        listaNombres.add("Nombre");
+        listaNombres.add("Activo");
+        listaNombres.add("Pasivo");
+        tabla.nombresDeColumnas(listaNombres);
+        jTable1.setModel(tabla);
+        List<Cuenta> listaCuentas = consulta.consultar();
+       
+        if (listaCuentas != null)
+        {
+            for (int i = 0; i < listaCuentas.size(); i++) {
+            if (listaCuentas.get(i).getTipo() == ACTIVO)
+            {
+                List listac = new ArrayList(); 
+                listac.add(listaCuentas.get(i).getNombre());
+                listac.add(listaCuentas.get(i).getMonto()); 
+                listac.add("0");
+                Activo nuevaActivo = new Activo();
+                nuevaActivo.setNombre(listaCuentas.get(i).getNombre());
+                nuevaActivo.setMonto(listaCuentas.get(i).getMonto());
+                tabla.agregarFila(listac);
+                clasificador.clasificarCuenta(nuevaActivo);
+            }    
+            if (listaCuentas.get(i).getTipo() == PASIVO)
+            {
+                List listac = new ArrayList(); 
+                listac.add(listaCuentas.get(i).getNombre());
+                listac.add("0");
+                listac.add(listaCuentas.get(i).getMonto()); 
+                Pasivo nuevaPasivo = new Pasivo();
+                nuevaPasivo.setNombre(listaCuentas.get(i).getNombre());
+                nuevaPasivo.setMonto(listaCuentas.get(i).getMonto());
+                tabla.agregarFila(listac);
+                clasificador.clasificarCuenta(nuevaPasivo);
+            }    
+        }
+        
+        }
+        
+       
+        
     }
 
     /**
@@ -27,6 +98,7 @@ public class Contabilidad extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -39,6 +111,7 @@ public class Contabilidad extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
+        jToggleButton2 = new javax.swing.JToggleButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,23 +135,47 @@ public class Contabilidad extends javax.swing.JFrame {
                 jTable1MouseClicked(evt);
             }
         });
+        jTable1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTable1InputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setText("Ingresar Nombre  de Cuenta");
 
-        jTextField1.setText("jTextField1");
-
         jLabel2.setText("Ingresar Monto de Cuenta");
 
-        jTextField2.setText("jTextField2");
+        jToggleButton1.setText("Agregar Cuenta");
+        jToggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jToggleButton1MouseClicked(evt);
+            }
+        });
 
-        jToggleButton1.setText("Agregar");
-
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Activo");
+        jRadioButton1.setContentAreaFilled(false);
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Pasivo");
+        jRadioButton2.setContentAreaFilled(false);
 
         jLabel4.setText("Cuentas: ");
+
+        jToggleButton2.setText("Ver Reporte");
+        jToggleButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jToggleButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -91,8 +188,7 @@ public class Contabilidad extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(116, 116, 116)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel4)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
@@ -103,10 +199,8 @@ public class Contabilidad extends javax.swing.JFrame {
                                     .addComponent(jTextField2))
                                 .addGap(52, 52, 52))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(31, 31, 31)
-                                        .addComponent(jToggleButton1))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jToggleButton1)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jRadioButton1)
                                         .addGap(14, 14, 14)
@@ -118,6 +212,10 @@ public class Contabilidad extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField1))
                         .addGap(55, 55, 55))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(249, 249, 249)
+                .addComponent(jToggleButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,6 +240,8 @@ public class Contabilidad extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(jToggleButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -164,26 +264,141 @@ public class Contabilidad extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 480));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
+        if (jTable1.getSelectedRow() == -1)
+        {
+            System.out.println("Hola");
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jToggleButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseClicked
+
+            IncersionCuenta ic = new IncersionCuenta();
+            String nombre = jTextField1.getText();
+            float monto = Float.parseFloat(jTextField2.getText());
+            
+            List lista = new ArrayList();
+            
+            lista.add(jTextField1.getText());
+            if (jRadioButton1.isSelected())
+            {
+              lista.add(jTextField2.getText());
+              lista.add("0");
+              Activo cuentaActivo = new Activo(); 
+              cuentaActivo.setNombre(nombre);
+              cuentaActivo.setMonto(monto);
+              //ic.insertar(cuentaActivo);
+              nuevascuentas.clasificarCuenta(cuentaActivo); 
+              clasificador.clasificarCuenta(cuentaActivo);                
+            }
+            if(jRadioButton2.isSelected())
+            {
+                
+              lista.add("0");
+              lista.add(jTextField2.getText());
+              Pasivo cuentaPasivo = new Pasivo(); 
+              cuentaPasivo.setNombre(nombre);
+              cuentaPasivo.setMonto(monto);
+              //ic.insertar(cuentaPasivo);
+              nuevascuentas.clasificarCuenta(cuentaPasivo);
+              clasificador.clasificarCuenta(cuentaPasivo);
+            }
+                     
+            tabla.agregarFila(lista);
+            jTable1.setModel(tabla);
+                 
+            
+            
+            this.resetearValores();
+        
+    }//GEN-LAST:event_jToggleButton1MouseClicked
+
+    private void jToggleButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton2MouseClicked
+        Balance balance = new Balance (clasificador);
+        insertarNuevasCuentas();
+        balance.setVisible(true);
+    
+    }//GEN-LAST:event_jToggleButton2MouseClicked
+
+    private void jTable1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable1InputMethodTextChanged
+        System.out.println("Se cambio algo");
+    }//GEN-LAST:event_jTable1InputMethodTextChanged
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        String nombree = (String) tabla.getValueAt(jTable1.getSelectedRow(), 0);
+        int montoActivo = Integer.valueOf(tabla.getValueAt(jTable1.getSelectedRow(), 1).toString());
+        int montoPasivo = Integer.valueOf(tabla.getValueAt(jTable1.getSelectedRow(), 2).toString());
+        
+        if (montoActivo != 0)
+        {
+//            if (nuevascuentas.getCuentasActivo() != null)
+//            {
+//               for (int i = 0; i < nuevascuentas.getCuentasActivo().size(); i++) {
+//                if (nombree.equals(nuevascuentas.getCuentasActivo().get(i)))
+//                {
+//                    System.out.println("Viejo Monto: " + nuevascuentas.getCuentasActivo().get(i).getValor());
+//                    nuevascuentas.getCuentasActivo().get(i).setMonto(montoActivo);
+//                    System.out.println("Nuevo Monto: " + nuevascuentas.getCuentasActivo().get(i).getValor());
+//                }
+//                } 
+//            }
+            for (int i = 0; i < clasificador.getCuentasActivo().size(); i++) {
+                if (nombree.equals(clasificador.getCuentasActivo().get(i)))
+                {
+                    System.out.println("Viejo Monto: " + clasificador.getCuentasActivo().get(i).getValor());
+                    clasificador.getCuentasActivo().get(i).setMonto(montoActivo);
+                    System.out.println("Nuevo Monto: " + clasificador.getCuentasActivo().get(i).getValor());
+                }
+            }
+            
+        }
+        
+        if (montoPasivo != 0 && (nuevascuentas.getCuentasActivo() != null))
+        {
+            for (int i = 0; i < nuevascuentas.getCuentasActivo().size(); i++) {
+                if (nombree.equals(nuevascuentas.getCuentasActivo().get(i)))
+                {
+                    nuevascuentas.getCuentasActivo().get(i).setMonto(montoActivo);
+                }
+            }
+        }
+      
+    }//GEN-LAST:event_jTable1KeyReleased
+    private void resetearValores()
+    {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        
+        
+        cuenta = null;
+    }
+    private void insertarNuevasCuentas()
+    {
+        IncersionCuenta ic = new IncersionCuenta();
+        for (int i = 0; i < nuevascuentas.getCuentasActivo().size(); i++) {
+            ic.insertar(nuevascuentas.getCuentasActivo().get(i));
+        }
+        for (int i = 0; i < nuevascuentas.getCuentasPasivo().size(); i++) {
+            ic.insertar(nuevascuentas.getCuentasPasivo().get(i));
+        }
+    }
     /**
      * @param args the command line arguments
      */
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -197,5 +412,6 @@ public class Contabilidad extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 }

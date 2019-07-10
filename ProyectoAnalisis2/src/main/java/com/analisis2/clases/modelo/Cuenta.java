@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Juan Diego Arriola
+ * @author crist
  */
 @Entity
 @Table(name = "cuenta")
@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Cuenta.findAll", query = "SELECT c FROM Cuenta c")
     , @NamedQuery(name = "Cuenta.findByIdCuenta", query = "SELECT c FROM Cuenta c WHERE c.idCuenta = :idCuenta")
     , @NamedQuery(name = "Cuenta.findByNombre", query = "SELECT c FROM Cuenta c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Cuenta.findByMonto", query = "SELECT c FROM Cuenta c WHERE c.monto = :monto")})
+    , @NamedQuery(name = "Cuenta.findByMonto", query = "SELECT c FROM Cuenta c WHERE c.monto = :monto")
+    , @NamedQuery(name = "Cuenta.findByTipo", query = "SELECT c FROM Cuenta c WHERE c.tipo = :tipo")})
 public class Cuenta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +44,9 @@ public class Cuenta implements Serializable {
     @Basic(optional = false)
     @Column(name = "Monto")
     private int monto;
+    @Basic(optional = false)
+    @Column(name = "Tipo")
+    private int tipo;
 
     public Cuenta() {
     }
@@ -51,10 +55,11 @@ public class Cuenta implements Serializable {
         this.idCuenta = idCuenta;
     }
 
-    public Cuenta(Integer idCuenta, String nombre, int monto) {
+    public Cuenta(Integer idCuenta, String nombre, int monto, int tipo) {
         this.idCuenta = idCuenta;
         this.nombre = nombre;
         this.monto = monto;
+        this.tipo = tipo;
     }
 
     public Integer getIdCuenta() {
@@ -79,6 +84,14 @@ public class Cuenta implements Serializable {
 
     public void setMonto(int monto) {
         this.monto = monto;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 
     @Override

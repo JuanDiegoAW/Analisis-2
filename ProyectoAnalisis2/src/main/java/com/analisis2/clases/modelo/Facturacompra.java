@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Juan Diego Arriola
+ * @author crist
  */
 @Entity
 @Table(name = "facturacompra")
@@ -137,4 +137,5 @@ public class Facturacompra implements Serializable {
     public String toString() {
         return "com.analisis2.clases.modelo.Facturacompra[ idFacturaCompra=" + idFacturaCompra + " ]";
     }
+    
 }

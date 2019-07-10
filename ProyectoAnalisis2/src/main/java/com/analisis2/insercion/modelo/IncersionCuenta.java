@@ -7,37 +7,36 @@ package com.analisis2.insercion.modelo;
 
 import com.analisis2.clases.modelo.Cuenta;
 import com.analisis2.clases.modelo.CuentaJpaController;
-import com.analisis2.clases.modelo.Detallefacturacompra;
-import com.analisis2.clases.modelo.DetallefacturacompraJpaController;
-import com.analisis2.clases.modelo.EM;
-import com.analisis2.clases.modelo.Producto;
+import com.analisis2.programa.controlador.Cuentas;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 
 /**
  *
  * @author crist
  */
-public class IncersionCuenta implements IncersionFactura {
+public class IncersionCuenta implements Insercion {
 
-    @Override
-    public void insertarDatosFactura(Object[] datos) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("conexion");
-        
-        EM e = EM.crearEntityManager();
-        EntityManager em = e.getEntity();
-        TypedQuery<Cuenta> queryCuenta = em.createNamedQuery("Cuenta.findByNombre", Cuenta.class);
-        queryCuenta.setParameter("nombre", datos[0]);
-        Cuenta c = queryCuenta.getSingleResult();
-        Cuenta detalle = new Cuenta();
-        detalle.setMonto((int) datos[1]);
-        
-        
-        
-        CuentaJpaController facturaController = new CuentaJpaController(emf);
-        facturaController.create(detalle);
+    public IncersionCuenta() {
     }
+
     
+    @Override
+    public void insertar(Cuentas cuentaf) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("conexion");
+
+        //TypedQuery<Cuenta> queryCuenta = em.createNamedQuery("Cuenta.findByNombre", Cuenta.class);
+        //queryCuenta.setParameter("nombre", cuentaf.getNombre());
+       // Cuenta c = queryCuenta.getSingleResult();
+        Cuenta nuevacuenta = new Cuenta();
+        nuevacuenta.setNombre(cuentaf.getNombre());
+        nuevacuenta.setMonto((int) cuentaf.getValor());
+        nuevacuenta.setTipo((int) cuentaf.getTipo());
+        
+        System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" + cuentaf.getTipo());
+       
+        CuentaJpaController cuentaController = new CuentaJpaController(emf);
+        cuentaController.create(nuevacuenta);   
+    }  
 }

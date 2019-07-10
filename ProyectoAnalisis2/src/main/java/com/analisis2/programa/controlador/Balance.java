@@ -5,6 +5,8 @@
  */
 package com.analisis2.programa.controlador;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author crist
@@ -12,10 +14,23 @@ package com.analisis2.programa.controlador;
 
 public class Balance implements Reporte{
 
+    private ClasificadorCuenta cuentas; 
+    private float capital; 
+
+    public Balance(ClasificadorCuenta clasificador) {
+        this.cuentas = clasificador;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     @Override
-    public float getFinal() {
-       
-        return 0;
+    public void calcularValores() {
+      capital = cuentas.getValorActivo() - cuentas.getValorPasivo();
     }
     
 }
