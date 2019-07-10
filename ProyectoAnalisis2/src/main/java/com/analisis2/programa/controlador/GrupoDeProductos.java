@@ -25,6 +25,11 @@ public class GrupoDeProductos implements CreadorArreglo{
     public void agregar(CreadorArreglo g) {
         hijos.add(g);
     }
+    
+    public int size()
+    {
+        return hijos.size();
+    }
 
     public void eliminar(CreadorArreglo g) {
         hijos.remove(g);
@@ -34,5 +39,4 @@ public class GrupoDeProductos implements CreadorArreglo{
     {
         return hijos.size();
     }
-    
 }

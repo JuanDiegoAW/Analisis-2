@@ -1,7 +1,9 @@
 package com.analisis2.clases.vista;
 
+import com.analisis2.clases.modelo.Arreglo;
 import com.analisis2.clases.modelo.Marca;
 import com.analisis2.clases.modelo.Producto;
+import com.analisis2.insercion.modelo.IncersionArreglo;
 import com.analisis2.programa.controlador.CreadorArreglo;
 import com.analisis2.programa.controlador.GrupoDeProductos;
 import com.analisis2.programa.controlador.LectorDeBarras;
@@ -353,6 +355,12 @@ public class VentanaArreglo extends javax.swing.JFrame {
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         
+//        IncersionArreglo i = new IncersionArreglo(grupo, grupo.getPrecio());
+//        Arreglo arreglo = i.crearArreglo();
+//        
+        LlenarArreglo l = new LlenarArreglo(grupo, grupo.getPrecio());
+        l.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void limpiarVentana()

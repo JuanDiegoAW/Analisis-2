@@ -18,12 +18,22 @@ public class ProductoIndividual implements CreadorArreglo {
     
     @Override
     public float getPrecio() {
-        return producto.getPrecio() * cantidad;
+        return this.producto.getPrecio() * this.cantidad;
     } 
     
     public String getNombreProducto()
     {
-        return producto.getNombre();
+        return this.producto.getNombre();
+    }
+    
+    public Producto getProducto()
+    {
+        return this.producto;
+    }
+    
+    public int getCantidad()
+    {
+        return this.cantidad;
     }
 
 }
