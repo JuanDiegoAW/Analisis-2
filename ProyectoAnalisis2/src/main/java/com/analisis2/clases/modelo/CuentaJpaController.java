@@ -17,7 +17,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author crist
+ * @author Juan Diego Arriola
  */
 public class CuentaJpaController implements Serializable {
 

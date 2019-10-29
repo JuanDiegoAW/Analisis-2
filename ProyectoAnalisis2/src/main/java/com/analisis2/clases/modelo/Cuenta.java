@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author crist
+ * @author Juan Diego Arriola
  */
 @Entity
 @Table(name = "cuenta")
