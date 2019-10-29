@@ -2,9 +2,13 @@ package com.analisis2.programa.controlador;
 import com.analisis2.clases.modelo.EM;
 import com.analisis2.clases.vista.MenuPrincipal;
 import com.analisis2.insercion.modelo.IncersionInicial;
+import com.mysql.cj.xdevapi.Result;
+import com.sun.net.httpserver.Authenticator.Failure;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+
 
 /*
  * @author Juan Diego Arriola
@@ -12,8 +16,8 @@ import javax.persistence.Persistence;
 public class Main {
 
     public static void main(String[] args) {
-        IncersionInicial i = new IncersionInicial();
-        i.insertarDatos();
+//        IncersionInicial i = new IncersionInicial();
+//        i.insertarDatos();
         MenuPrincipal m = new MenuPrincipal();
         m.setVisible(true);          
        
@@ -25,7 +29,9 @@ public class Main {
                 System.out.println("Se cerro la conexion.");
             }
         });
+
     }
+  }
     
     
-}
+

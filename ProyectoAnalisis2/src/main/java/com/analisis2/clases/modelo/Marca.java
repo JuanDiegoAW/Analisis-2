@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Juan Diego Arriola
+ * @author crist
  */
 @Entity
 @Table(name = "marca")
@@ -116,7 +116,7 @@ public class Marca implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "com.analisis2.clases.modelo.Marca[ idMarca=" + idMarca + " ]";
     }
     
 }

@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Juan Diego Arriola
+ * @author crist
  */
 @Entity
 @Table(name = "producto")
@@ -57,9 +57,8 @@ public class Producto implements Serializable {
     @Basic(optional = false)
     @Column(name = "Medida")
     private String medida;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Precio")
-    private Float precio;
+    private Integer precio;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoidProducto")
     private Collection<ArregloHasProducto> arregloHasProductoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoidProducto")
@@ -122,11 +121,11 @@ public class Producto implements Serializable {
         this.medida = medida;
     }
 
-    public Float getPrecio() {
+    public Integer getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Float precio) {
+    public void setPrecio(Integer precio) {
         this.precio = precio;
     }
 
@@ -178,7 +177,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "com.analisis2.clases.modelo.Producto[ idProducto=" + idProducto + " ]";
     }
     
 }

@@ -21,10 +21,9 @@ public class Pasivo implements Cuentas{
     }
     
     
-    @Override
+   @Override
     public float getValor() {
-        
-        return this.monto; 
+        return monto; 
     }
 
     public String getNombre() {
@@ -46,6 +45,7 @@ public class Pasivo implements Cuentas{
     public int getTipo() {
         return tipo;
     }
+
 
     
     

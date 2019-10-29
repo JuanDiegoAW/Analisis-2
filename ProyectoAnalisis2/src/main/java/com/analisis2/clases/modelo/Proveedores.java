@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Juan Diego Arriola
+ * @author crist
  */
 @Entity
 @Table(name = "proveedores")

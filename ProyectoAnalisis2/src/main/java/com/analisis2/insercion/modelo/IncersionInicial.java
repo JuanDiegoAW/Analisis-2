@@ -46,35 +46,30 @@ public class IncersionInicial {
         p1.setDescripcion("Chocolate blanco Hershey's de 110gr");
         p1.setExistencia(20);
         p1.setMarcaidMarca(m1);
-        p1.setPrecio((float)12);
         
         p2.setNombre("Chocolate Negro");
         p2.setMedida("110gr");
         p2.setDescripcion("Chocolate negro Hershey's de 110gr");
         p2.setExistencia(10);
         p2.setMarcaidMarca(m1);
-        p2.setPrecio((float)10);
         
         p3.setNombre("Peluche de Stitch");
         p3.setMedida("20cm");
         p3.setDescripcion("Peluche de Stitch de 20cm");
         p3.setExistencia(5);
         p3.setMarcaidMarca(m2);
-        p3.setPrecio((float)150);
         
         p4.setNombre("Peluche de Woody");
         p4.setMedida("30cm");
         p4.setDescripcion("Peluche de Woody de Toy Story. 30cm");
         p4.setExistencia(10);
         p4.setMarcaidMarca(m2);
-        p4.setPrecio((float)350);
         
         p5.setNombre("Globos blancos");
         p5.setMedida("30u");
         p5.setDescripcion("30 unidades de globos blancos.");
         p5.setExistencia(10);
         p5.setMarcaidMarca(m3);
-        p5.setPrecio((float)5);
         
         MarcaJpaController marcaController = new MarcaJpaController(emf);
         ProductoJpaController productoController = new ProductoJpaController(emf);

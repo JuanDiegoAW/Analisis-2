@@ -6,6 +6,7 @@
 package com.analisis2.clases.modelo;
 
 import com.analisis2.clases.modelo.exceptions.NonexistentEntityException;
+import com.analisis2.clases.modelo.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -17,7 +18,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Juan Diego Arriola
+ * @author crist
  */
 public class ArregloHasProductoJpaController implements Serializable {
 
@@ -30,7 +31,7 @@ public class ArregloHasProductoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(ArregloHasProducto arregloHasProducto) {
+    public void create(ArregloHasProducto arregloHasProducto) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -55,6 +56,11 @@ public class ArregloHasProductoJpaController implements Serializable {
                 productoidProducto = em.merge(productoidProducto);
             }
             em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (findArregloHasProducto(arregloHasProducto.getId()) != null) {
+                throw new PreexistingEntityException("ArregloHasProducto " + arregloHasProducto + " already exists.", ex);
+            }
+            throw ex;
         } finally {
             if (em != null) {
                 em.close();

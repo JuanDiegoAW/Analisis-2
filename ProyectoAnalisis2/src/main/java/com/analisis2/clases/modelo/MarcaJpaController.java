@@ -20,7 +20,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Juan Diego Arriola
+ * @author crist
  */
 public class MarcaJpaController implements Serializable {
 
