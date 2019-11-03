@@ -21,6 +21,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,6 +59,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("jButton1");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Modulo de Ventas");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -64,6 +77,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
@@ -93,7 +110,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
@@ -116,7 +137,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,14 +168,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton3MouseClicked
 
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        Ventas v = new Ventas();
+        v.setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_jButton4MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
